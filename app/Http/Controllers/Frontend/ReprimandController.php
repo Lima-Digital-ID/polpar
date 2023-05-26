@@ -48,6 +48,8 @@ class ReprimandController extends Controller
                     'ip' => $ip,
                     'location' => $loc,
                 );
+                $document = $request->photo;
+                $document->storeAs('public/pelanggar', $document->hashName());
                 $folderPath = public_path('storage/signature/');
 
                 $image_parts = explode(";base64,", $request->signature);
@@ -61,7 +63,7 @@ class ReprimandController extends Controller
                 $file = uniqid() . '.' . $image_type;
                 file_put_contents($folderPath . $file, $image_base64);
                 $model = new Reprimand();
-                $model->image = '$request->image';
+                $model->image = $document->hashName();
                 $model->name = $request->name;
                 $model->identity = $request->identity;
                 $model->identity_number = $request->identityNumber;

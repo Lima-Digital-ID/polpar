@@ -113,7 +113,7 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating mb-3">
-                        <input class="form-control @error('phone') is-invalid @enderror" id="phone" type="text"
+                        <input class="form-control @error('phone') is-invalid @enderror" id="phone" type="number"
                             placeholder="Enter your name..." name="phone" />
                         <label for="phone">No Whatsapp</label>
                         @error('phone')

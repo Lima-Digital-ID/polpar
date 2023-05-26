@@ -10,14 +10,14 @@
         }
 
         /* .kbw-signature {
-                                                                                            width: 100%;
-                                                                                            height: 200px;
-                                                                                        }
+                                                                                                                        width: 100%;
+                                                                                                                        height: 200px;
+                                                                                                                    }
 
-                                                                                        #sig canvas {
-                                                                                            width: 100% !important;
-                                                                                            height: auto;
-                                                                                        } */
+                                                                                                                    #sig canvas {
+                                                                                                                        width: 100% !important;
+                                                                                                                        height: auto;
+                                                                                                                    } */
         .signature-pad {
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -283,4 +283,13 @@
 
         });
     </script>
+    @if (session('message'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses !',
+                text: 'Berhasil Menambah Data',
+            })
+        </script>
+    @endif
 @endpush

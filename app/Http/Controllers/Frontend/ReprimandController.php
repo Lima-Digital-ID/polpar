@@ -67,7 +67,7 @@ class ReprimandController extends Controller
                 $model->signature = $file;
                 $model->save();
             });
-            return redirect()->back()->with('message', 'Banner berhasil ditambahkan.');
+            return redirect()->back()->with('message', 'Data Pelanggar berhasil ditambahkan.');
         } catch (\Exception $e) {
             return $e->getMessage();
             // return redirect()->back()->with('message', 'Terjadi kesalahan. : ' . $e->getMessage());

@@ -18,6 +18,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [LandingPageController::class, 'index']);
-Route::get('/reprimand', [ReprimandController::class, 'index']);
+// Route::get('/', [LandingPageController::class, 'index']);
+Route::get('/', [ReprimandController::class, 'index']);
 Route::post('/reprimand', [ReprimandController::class, 'store']);

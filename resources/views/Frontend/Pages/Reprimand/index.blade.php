@@ -9,20 +9,29 @@
             margin-bottom: 20px;
         }
 
-        /* .kbw-signature {
-                                                                                                                        width: 100%;
-                                                                                                                        height: 200px;
-                                                                                                                    }
-
-                                                                                                                    #sig canvas {
-                                                                                                                        width: 100% !important;
-                                                                                                                        height: auto;
-                                                                                                                    } */
         .signature-pad {
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 100%;
             height: 260px;
+        }
+
+        .pelanggarName {
+            position: absolute;
+            text-align: center !important;
+            top: 200px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 1rem 0.75rem;
+            overflow: hidden;
+            text-align: start;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            pointer-events: none;
+            border: 1px solid transparent;
+            transform-origin: 0 0;
+            transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
         }
     </style>
 
@@ -71,7 +80,7 @@
                 <div class="col-12 col-md-6">
                     <div class="form-floating mb-3">
                         <input class="form-control @error('name') is-invalid @enderror" id="name" type="text"
-                            placeholder="Enter your name..." name="name" />
+                            placeholder="Enter your name..." name="name" onkeyup="pelanggar()" />
                         <label for="name">Nama Pelanggar</label>
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -165,43 +174,49 @@
                 </div>
                 <div class="col-6 col-md-6">
                     <div class="form-floating mb-3">
-                        <select name="" id="officer" class="form-control @error('officer') is-invalid @enderror"
+                        <select id="officer" class="form-control @error('officer') is-invalid @enderror"
                             style="width: 100%" name="officer">
                             <option value="" selected disabled>Pilih Petugas</option>
-                            <option value="sim">Petugas 1</option>
-                            <option value="ktp">Petugas 2</option>
+                            @foreach ($officer as $ofc)
+                                <option value="{{ $ofc->id }}" data-signature="{{ $ofc->signature }}">
+                                    {{ $ofc->name }}</option>
+                            @endforeach
                         </select>
                         <label for="officer">Petugas</label>
                         @error('officer')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
 
-                        <img id="image-signature-officer" alt="" style="max-height: 150px;">
+                        <img id="image-signature-officer" alt="" width="150px" class="mt-4">
                     </div>
                 </div>
                 <div class="col-6 col-md-6">
                     <div class="form-floating mb-3">
                         <canvas id="signature-pad"
-                            class="signature-pad @error('signature')
+                            class="signature-pad simpanttd @error('signature')
                             is-invalid
                         @enderror"></canvas>
                         <input type="hidden" name="signature" id="signature"
                             class="@error('signature')
                             is-invalid
                         @enderror">
-                        <label for="signature">Tanda Tangan Pelanggar</label>
+                        <label for="signature">Bondowoso , {{ date('d-m-Y') }}</label>
+                        <span class="pelanggarName"></span>
                         @error('signature')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        <button type="button" class="btn btn-danger btn-sm" id="clear"><i class="fa fa-eraser"></i>
-                            Hapus</button>
-                        <button type="button" class="btn btn-success btn-sm" id="save-png"><i class="fa fa-save"></i>
-                            Simpan</button>
+                        <button type="button" class="btn btn-danger btn-sm mb-3" id="clear"><i
+                                class="fa fa-eraser"></i>
+                            Hapus Tanda Tangan</button>
+                        <button type="button" class="btn btn-success btn-sm mb-3" id="save-png"><i
+                                class="fa fa-save"></i>
+                            Simpan Tanda Tangan</button>
                     </div>
                 </div>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                <button type="submit" class="btn btn-primary" id="saveForm"><i class="fas fa-save"></i>
+                    Simpan</button>
                 <button type="reset" class="btn btn-secondary text-white"><i class="fas fa-refresh"></i> Reset</button>
             </div>
     </div>
@@ -237,6 +252,14 @@
 
             });
 
+            // Preview Image Signature Officer
+            $('#officer').change(function() {
+                var signature = $(this).find(":selected").data("signature")
+                $('#image-signature-officer').attr('src',
+                    signature
+                );
+            });
+
             var canvas = document.getElementById('signature-pad');
 
             // Adjust canvas coordinate space taking into account pixel ratio,
@@ -258,6 +281,15 @@
             var signaturePad = new SignaturePad(canvas, {
                 backgroundColor: 'rgb(255, 255, 255)' // necessary for saving image as JPEG; can be removed is only saving as PNG or SVG
             });
+            // $('.simpanttd').click(function() {
+            //     if (signaturePad.isEmpty()) {
+            //         alert("Tanda Tangan Anda Kosong! Silahkan tanda tangan terlebih dahulu.");
+            //     } else {
+            //         var data = signaturePad.toDataURL('upload/signature');
+            //         $("#signature").val(data);
+            //         console.log(data);
+            //     }
+            // });
 
             document.getElementById('save-png').addEventListener('click', function() {
                 if (signaturePad.isEmpty()) {
@@ -281,7 +313,17 @@
                 }
             });
 
+            $('#saveForm').click(function() {
+                console.log('asd');
+
+            });
+
         });
+
+        function pelanggar() {
+            var name = $('#name').val();
+            $('.pelanggarName').html(name);
+        }
     </script>
     @if (session('message'))
         <script>

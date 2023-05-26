@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reprimands', function (Blueprint $table) {
+        Schema::create('officers', function (Blueprint $table) {
             $table->id();
-            $table->longText('image');
             $table->string('name');
-            $table->enum('identity', ['sim', 'ktp']);
-            $table->bigInteger('identity_number');
-            $table->string('phone');
             $table->longText('signature');
-            $table->unsignedBigInteger('officer_id');
             $table->timestamps();
-            $table->foreign('officer_id')->references('id')->on('officers');
         });
     }
 
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reprimands');
+        Schema::dropIfExists('officers');
     }
 };

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Officer;
 use App\Models\Reprimand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,8 @@ class ReprimandController extends Controller
 {
     public function index(Request $request)
     {
-        return view('Frontend.Pages.Reprimand.index');
+        $officer = Officer::get();
+        return view('Frontend.Pages.Reprimand.index', compact('officer'));
     }
 
     public function store(Request $request)
@@ -23,7 +25,7 @@ class ReprimandController extends Controller
             'identity'      => 'required',
             'identityNumber'      => 'required',
             'phone'      => 'required',
-            'officer'      => 'nullable',
+            'officer'      => 'required',
             'signature'      => 'required',
         ], [
             'required' => ':attribute harus diisi.'
@@ -64,6 +66,7 @@ class ReprimandController extends Controller
                 $model->identity = $request->identity;
                 $model->identity_number = $request->identityNumber;
                 $model->phone = $request->phone;
+                $model->officer_id = $request->officer;
                 $model->signature = $file;
                 $model->save();
             });

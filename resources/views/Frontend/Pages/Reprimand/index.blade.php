@@ -61,7 +61,7 @@
 
                     <div class="mb-3">
                         <label for="myFileInput">Foto Pelanggar</label>
-                        <input id="myFileInput" type="file" accept="image/*,capture=camera" name="photo"
+                        <input id="myFileInput" type="file" accept="capture=camera" name="photo"
                             class="form-control @error('photo')
                                 is-invalid
                             @enderror">
@@ -121,53 +121,206 @@
                         @enderror
                     </div>
                 </div>
+                <div class="col-6 col-md-6">
+
+                    <div class="mb-3">
+                        <label for="myFileInputIdentity">File Identitas</label>
+                        <input id="myFileInputIdentity" type="file" accept="capture=camera" name="identity_file"
+                            class="form-control @error('identity_file')
+                                is-invalid
+                            @enderror">
+                        @error('identity_file')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-6 col-md-6">
+                    <div class="mb-3">
+
+                        <img id="preview-identity-before-upload" alt="" style="max-height: 150px;">
+                    </div>
+                </div>
                 <div class="col-12">
+                    <center>
+                        <h3>
+                            UNDANG-UNDANG REPUBLIK INDONESIA
+                            NOMOR 10.TAHUN 2009.
+                        </h3>
+                        <h3>
+                            TENTANG
+                            KEPARIWISATAAN
+                        </h3>
+                    </center>
                     <div class="mb-3">
                         <ol>
                             <li>
                                 <input type="checkbox" name="penalty[]" id="" value="1">
-                                <span for="penalty1">Pasal 378 KUHP menerangkan bahwa yang dimaksud dengan penipuan adalah
-                                    kondisi
-                                    yang dilakukan oleh siapa pun dengan maksud untuk menguntungkan diri sendiri atau orang
-                                    lain
-                                    secara melawan hukum, dengan memakai nama palsu atau martabat palsu, dengan tipu
-                                    muslihat,
-                                    atau
-                                    pun rangkaian kebohongan, menggerakkan orang lain untuk menyerahkan barang sesuatu
-                                    kepadanya,
-                                    atau supaya memberi hutang maupun menghapuskan piutang, diancam karena penipuan dengan
-                                    pidana
-                                    penjara paling lama empat tahun.</span>
+                                <span for="penalty1">Pasal 14 </span>
+                                <ul>
+                                    <li>
+                                        Usaha pariwisata meliputi, antara lain:
+                                        <ul>
+                                            <li>
+                                                daya tarik wisata;
+                                            </li>
+                                            <li>
+                                                kawasan pariwisata;
+                                            </li>
+                                            <li>
+                                                jasa transportasi wisata;
+                                            </li>
+                                            <li>
+                                                jasa perjalanan wisata;
+                                            </li>
+                                            <li>
+                                                jasa makanan dan minuman;
+                                            </li>
+                                            <li>
+                                                penyediaan akomodasi;
+                                            </li>
+                                            <li>
+                                                penyelenggaraan kegiatan hiburan dan rekreasi;
+                                            </li>
+                                            <li>
+                                                penyelenggaraan pertemuan, perjalanan insentif,
+                                                konferensi, dan pameran;
+                                            </li>
+                                            <li>
+                                                jasa informasi pariwisata;
+                                            </li>
+                                            <li>
+                                                jasa konsultan pariwisata;
+                                            </li>
+                                            <li>
+                                                jasa pramuwisata;
+                                            </li>
+                                            <li>
+                                                wisata tirta; dan
+                                            </li>
+                                            <li>
+                                                spa;
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>Usaha pariwisata selain sebagaimana dimaksud pada
+                                        ayat (1) diatur dengan Peraturan Menteri
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <input type="checkbox" name="penalty[]" id="" value="2">
-                                <span for="penalty2">Pasal 378 KUHP menerangkan bahwa yang dimaksud dengan penipuan adalah
-                                    kondisi
-                                    yang dilakukan oleh siapa pun dengan maksud untuk menguntungkan diri sendiri atau orang
-                                    lain
-                                    secara melawan hukum, dengan memakai nama palsu atau martabat palsu, dengan tipu
-                                    muslihat,
-                                    atau
-                                    pun rangkaian kebohongan, menggerakkan orang lain untuk menyerahkan barang sesuatu
-                                    kepadanya,
-                                    atau supaya memberi hutang maupun menghapuskan piutang, diancam karena penipuan dengan
-                                    pidana
-                                    penjara paling lama empat tahun.</span>
+                                <span for="penalty2">Pasal 15 </span>
+                                <ul>
+                                    <li>
+                                        Untuk dapat menyelenggarakan usaha pariwisata
+                                        sebagaimana dimaksud dalam Pasal 14, pengusaha
+                                        pariwisata wajib mendaftarkan usahanya terlebih
+                                        dahulu kepada Pemerintah atau Pemerintah Daerah.
+                                    </li>
+                                    <li>Ketentuan lebih lanjut mengenai tata cara
+                                        pendaftaran sebagaimana dimaksud pada ayat (1)
+                                        diatur dengan Peraturan Menteri.
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <input type="checkbox" name="penalty[]" id="" value="3">
-                                <span for="penalty3">Pasal 378 KUHP menerangkan bahwa yang dimaksud dengan penipuan adalah
-                                    kondisi
-                                    yang dilakukan oleh siapa pun dengan maksud untuk menguntungkan diri sendiri atau orang
-                                    lain
-                                    secara melawan hukum, dengan memakai nama palsu atau martabat palsu, dengan tipu
-                                    muslihat,
-                                    atau
-                                    pun rangkaian kebohongan, menggerakkan orang lain untuk menyerahkan barang sesuatu
-                                    kepadanya,
-                                    atau supaya memberi hutang maupun menghapuskan piutang, diancam karena penipuan dengan
-                                    pidana
-                                    penjara paling lama empat tahun.</span>
+                                <span for="penalty3">Pasal 53</span>
+                                <ul>
+                                    <li>
+                                        Tenaga kerja di bidang kepariwisataan memiliki
+                                        standar kompetensi.
+                                    </li>
+                                    <li>
+                                        Standar kompetensi sebagaimana dimaksud pada
+                                        ayat (1) dilakukan melalui sertifikasi kompetensi.
+                                    </li>
+                                    <li>
+                                        Sertifikasi kompetensi dilakukan oleh lembaga
+                                        sertifikasi profesi yang telah mendapat lisensi sesuai
+                                        dengan ketentuan peraturan perundang-undangan.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="penalty[]" id="" value="4">
+                                <span for="penalty4">Pasal 54</span>
+                                <ul>
+                                    <li>
+                                        Produk, pelayanan, dan pengelolaan usaha
+                                        pariwisata memiliki standar usaha.
+                                    </li>
+                                    <li>
+                                        Standar usaha sebagaimana dimaksud pada ayat (1)
+                                        dilakukan melalui sertifikasi usaha.
+                                    </li>
+                                    <li>
+                                        Sertifikasi usaha sebagaimana dimaksud pada ayat (2)
+                                        dilakukan oleh lembaga mandiri yang berwenang
+                                        sesuai dengan ketentuan peraturan
+                                        perundang-undangan.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="penalty[]" id="" value="5">
+                                <span for="penalty5">Pasal 55</span>
+                                <ul>
+                                    <li>
+                                        Ketentuan lebih lanjut mengenai sertifikasi kompetensi
+                                        sebagaimana dimaksud dalam Pasal 53 dan sertifikasi
+                                        usaha sebagaimana dimaksud dalam Pasal 54 diatur
+                                        dalam Peraturan Pemerintah.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="penalty[]" id="" value="6">
+                                <span for="penalty6">Pasal 63</span>
+                                <ul>
+                                    <li>
+                                        Setiap pengusaha pariwisata yang tidak memenuhi
+                                        ketentuan sebagaimana dimaksud dalam Pasal 15
+                                        dan/atau Pasal 26 dikenai sanksi administratif.
+                                    </li>
+                                    <li>
+                                        Sanksi administratif sebagaimana dimaksud pada
+                                        ayat (1) berupa:
+                                        <ul>
+                                            <li>
+                                                teguran tertulis;
+                                            </li>
+                                            <li>
+                                                pembatasan kegiatan usaha; dan
+                                            </li>
+                                            <li>
+                                                pembekuan sementara kegiatan usaha.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="penalty[]" id="" value="7">
+                                <span for="penalty7">Pasal 64</span>
+                                <ul>
+                                    <li>
+                                        Setiap orang yang dengan sengaja dan melawan
+                                        hukum merusak fisik daya tarik wisata sebagaimana
+                                        dimaksud dalam Pasal 27 dipidana dengan pidana
+                                        penjara paling lama 7 (tujuh) tahun dan denda paling
+                                        banyak Rp10.000.000.000,00 (sepuluh miliar
+                                        rupiah).
+                                    </li>
+                                    <li>
+                                        Setiap orang yang karena kelalaiannya dan melawan
+                                        hukum, merusak fisik, atau mengurangi nilai daya
+                                        tarik wisata sebagaimana dimaksud dalam Pasal 27
+                                        dipidana dengan pidana penjara paling lama 1 (satu)
+                                        tahun dan/atau denda paling banyak
+                                        Rp5.000.000.000,00 (lima miliar rupiah)
+                                    </li>
+                                </ul>
                             </li>
                         </ol>
                     </div>
@@ -246,6 +399,29 @@
                 reader.onload = (e) => {
 
                     $('#preview-image-before-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]);
+
+            });
+
+            // Open Camera
+            var myInput = document.getElementById('myFileInputIdentity');
+
+            function sendPic() {
+                var file = myInput.files[0];
+            }
+
+            myInput.addEventListener('change', sendPic, false);
+
+            // Preview Image
+            $('#myFileInputIdentity').change(function() {
+
+                let reader = new FileReader();
+
+                reader.onload = (e) => {
+
+                    $('#preview-identity-before-upload').attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(this.files[0]);

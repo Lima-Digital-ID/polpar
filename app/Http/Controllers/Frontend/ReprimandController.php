@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Officer;
+use App\Models\Penalty;
 use App\Models\Reprimand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class ReprimandController extends Controller
             'phone'      => 'required',
             'officer'      => 'required',
             'signature'      => 'required',
+            'identity_file'      => 'required',
         ], [
             'required' => ':attribute harus diisi.'
         ], [
@@ -34,22 +36,25 @@ class ReprimandController extends Controller
             'name' => 'Nama pelanggar',
             'identity' => 'Identitas pelanggar',
             'identityNumber' => 'No identitas pelanggar',
+            'identity_file' => 'Foto Identitas pelanggar',
             'phone' => 'No Whatsapp pelanggar',
             'officer' => 'Petugas',
             'signature' => 'Tanda Tangan Pelanggar',
         ]);
         try {
             DB::transaction(function () use ($request) {
-                $all = $request->all();
-                $ip = $request->ip();
-                $loc = \Location::get('118.99.121.88');
-                $data = array(
-                    'data' => $all,
-                    'ip' => $ip,
-                    'location' => $loc,
-                );
+                // $all = $request->all();
+                // $ip = $request->ip();
+                // $loc = \Location::get('118.99.121.88');
+                // $data = array(
+                //     'data' => $all,
+                //     'ip' => $ip,
+                //     'location' => $loc,
+                // );
                 $document = $request->photo;
                 $document->storeAs('public/pelanggar', $document->hashName());
+                $documentIdentity = $request->identity_file;
+                $documentIdentity->storeAs('public/identitas-pelanggar', $documentIdentity->hashName());
                 $folderPath = public_path('storage/signature/');
 
                 $image_parts = explode(";base64,", $request->signature);
@@ -64,6 +69,7 @@ class ReprimandController extends Controller
                 file_put_contents($folderPath . $file, $image_base64);
                 $model = new Reprimand();
                 $model->image = $document->hashName();
+                $model->image_identity = $documentIdentity->hashName();
                 $model->name = $request->name;
                 $model->identity = $request->identity;
                 $model->identity_number = $request->identityNumber;
@@ -71,6 +77,13 @@ class ReprimandController extends Controller
                 $model->officer_id = $request->officer;
                 $model->signature = $file;
                 $model->save();
+
+                foreach ($request->penalty as $key => $value) {
+                    $penalty = new Penalty();
+                    $penalty->reprimands_id = $model->id;
+                    $penalty->penalty = $value;
+                    $penalty->save();
+                }
             });
             return redirect()->back()->with('message', 'Data Pelanggar berhasil ditambahkan.');
         } catch (\Exception $e) {

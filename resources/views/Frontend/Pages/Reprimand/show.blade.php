@@ -87,7 +87,7 @@
             <br>
             <span>POLICE RECORD</span>
             <br>
-            <span>Nomor : xxxx/xxxxx/123/xxx/123/xxx</span>
+            <span>Nomor : POLPAR/IV/2023/1</span>
         </center>
 
         <table width="100%">

@@ -44,6 +44,25 @@
             z-index: -5;
         }
 
+        @media only screen and (max-width: 600px){
+            .logo-emas{
+                position: absolute;
+    top: 271px;
+    left: 115px;
+    width: 121px;
+    height: 129px;
+    z-index: -5;
+            }
+
+            .identitas-pelanggar{
+                width: 70px
+            }
+
+            .pelanggar{
+                width: 70px
+            }
+        }
+
         @media print {
             .logo-emas {
                 position: absolute;
@@ -77,9 +96,9 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-sm-3 mt-5" style="font-size: 13px">
-                <span><u>Nomor : 132456789</u></span>
-            </div> --}}
+            <div class="col-sm-3 mt-5" style="font-size: 13px">
+                {{-- <span><u>Nomor : 132456789</u></span> --}}
+            </div>
         </div>
         {{-- BODY --}}
         <center style="font-size:13px;font-weight:500;margin-top:20px">
@@ -87,7 +106,7 @@
             <br>
             <span>POLICE RECORD</span>
             <br>
-            <span>Nomor : POLPAR/IV/2023/1</span>
+            <span>Nomor : {{ $data->number_reprimand }}</span>
         </center>
 
         <table width="100%">
@@ -163,14 +182,14 @@
         </center>
         <br>
         <div class="row" style="text-align: end">
-            <div class="col-sm-2">
-                <img src="{{ url('storage/identitas-pelanggar') . '/' . $data->image_identity }}" alt=""
+            <div class="col-sm-2 col-2">
+                <img src="{{ url('storage/identitas-pelanggar') . '/' . $data->image_identity }}" alt="" class="identitas-pelanggar"
                     width="150px">
             </div>
-            <div class="col-sm-4">
-                <img src="{{ url('storage/pelanggar') . '/' . $data->image }}" alt="" width="150px">
+            <div class="col-sm-4 col-4">
+                <img src="{{ url('storage/pelanggar') . '/' . $data->image }}" alt="" class="pelanggar" width="150px">
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-6">
                 <table>
                     <tr>
                         <td>

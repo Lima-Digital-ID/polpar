@@ -53,6 +53,15 @@ class ReprimandController extends Controller
                 //     'ip' => $ip,
                 //     'location' => $loc,
                 // );
+                $no = '';
+                $noRep = Reprimand::orderBy('id','DESC')->first();;
+                if ($noRep) {
+                    $no = 'POLPAR/IV/2023/'.$noRep->id+1;
+                } else {
+
+                    $no = 'POLPAR/IV/2023/'.'1';
+                }
+
                 $document = $request->photo;
                 $document->storeAs('public/pelanggar', $document->hashName());
                 $documentIdentity = $request->identity_file;
@@ -78,6 +87,7 @@ class ReprimandController extends Controller
                 $model->phone = $request->phone;
                 $model->officer_id = $request->officer;
                 $model->signature = $file;
+                $model->number_reprimand = $no;
                 $model->save();
 
                 foreach ($request->penalty as $key => $value) {
@@ -87,7 +97,9 @@ class ReprimandController extends Controller
                     $penalty->save();
                 }
             });
-            return redirect()->back()->with('message', 'Data Pelanggar berhasil ditambahkan.');
+            $data = Reprimand::orderBy('id','DESC')->first();
+            return redirect('reprimand/'.$data->id);
+            // return redirect()->back()->with('message', 'Data Pelanggar berhasil ditambahkan.');
         } catch (\Exception $e) {
             return $e->getMessage();
             // return redirect()->back()->with('message', 'Terjadi kesalahan. : ' . $e->getMessage());

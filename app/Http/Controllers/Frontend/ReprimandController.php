@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Officer;
 use App\Models\Penalty;
 use App\Models\Reprimand;
+use App\Models\ReprimandsPenalty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +16,8 @@ class ReprimandController extends Controller
     public function index(Request $request)
     {
         $officer = Officer::get();
-        return view('Frontend.Pages.Reprimand.index', compact('officer'));
+        $pasal = Penalty::get();
+        return view('Frontend.Pages.Reprimand.index', compact('officer', 'pasal'));
     }
 
     public function store(Request $request)
@@ -79,9 +81,9 @@ class ReprimandController extends Controller
                 $model->save();
 
                 foreach ($request->penalty as $key => $value) {
-                    $penalty = new Penalty();
+                    $penalty = new ReprimandsPenalty();
                     $penalty->reprimands_id = $model->id;
-                    $penalty->penalty = $value;
+                    $penalty->penalty_id = $value;
                     $penalty->save();
                 }
             });
@@ -93,5 +95,12 @@ class ReprimandController extends Controller
             // return redirect()->back()->with('message', 'Terjadi kesalahan pada database : ' . $e->getMessage());
             return $e->getMessage();
         }
+    }
+
+    public function show($id)
+    {
+        $data = Reprimand::find($id);
+        $penaltyReprimand = ReprimandsPenalty::with('penalty')->where('reprimands_id', $id)->get();
+        return view('Frontend.Pages.Reprimand.show', compact('data', 'penaltyReprimand'));
     }
 }

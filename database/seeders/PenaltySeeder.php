@@ -84,11 +84,12 @@ class PenaltySeeder extends Seeder
             pendaftaran sebagaimana dimaksud pada ayat (1)
             diatur dengan Peraturan Menteri.
         </li>
-    </ul>
-</li>
-<li>
-    <input type="checkbox" name="penalty[]" id="" value="3">
-    <span for="penalty3">Pasal 53</span>
+    </ul>';
+        $model->save();
+
+        $model = new Penalty();
+        $model->title = 'Pasal 53';
+        $model->content = '
     <ul>
         <li>
             Tenaga kerja di bidang kepariwisataan memiliki

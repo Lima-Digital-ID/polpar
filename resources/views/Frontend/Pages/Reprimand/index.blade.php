@@ -42,7 +42,7 @@
 @endpush
 @section('content')
     <div class="col-md-offset-2 mg-b-40">
-        <form action="{{ url('reprimand') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('reprimand') }}" id="submitForm" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-12">
@@ -155,7 +155,7 @@
                         <ol>
                             @foreach ($pasal as $p)
                                 <li>
-                                    <input type="checkbox" name="penalty[]" id="" value="{{ $p->id }}">
+                                    <input type="radio" name="penalty[]" id="" value="{{ $p->id }}">
                                     <span for="penalty{{ $p->id }}">{{ $p->title }}</span>
                                     {!! $p->content !!}
                                 </li>
@@ -206,8 +206,9 @@
                 </div>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary" id="saveForm"><i class="fas fa-save"></i>
-                    Simpan</button>
+                <a href="javascript:void(0)" class="btn btn-primary" id="saveForm" onclick="submit()"><i
+                        class="fas fa-save"></i>
+                    Simpan</a>
                 <button type="reset" class="btn btn-secondary text-white"><i class="fas fa-refresh"></i> Reset</button>
             </div>
     </div>
@@ -307,8 +308,17 @@
 
             document.getElementById('save-png').addEventListener('click', function() {
                 if (signaturePad.isEmpty()) {
-                    alert("Tanda Tangan Anda Kosong! Silahkan tanda tangan terlebih dahulu.");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal !',
+                        text: 'Tanda Tangan Anda Kosong! Silahkan tanda tangan terlebih dahulu.',
+                    })
                 } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses !',
+                        text: 'Berhasil Menyimpan Tanda Tangan',
+                    })
                     var data = signaturePad.toDataURL('upload/signature');
                     $("#signature").val(data);
                     console.log(data);
@@ -333,6 +343,20 @@
             });
 
         });
+
+        function submit() {
+            const signature = $("#signature").val();
+            console.log(signature);
+            if (signature == '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal !',
+                    text: 'Tanda Tangan Anda Kosong! Silahkan tanda tangan terlebih dahulu.',
+                })
+            } else {
+                $('#submitForm').submit();
+            }
+        }
 
         function pelanggar() {
             var name = $('#name').val();

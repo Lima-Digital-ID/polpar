@@ -6,15 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Tourist Police</title>
+    <title>{{ $data->url }}</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Custom Google font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
+    {{-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> --}}
+    {{-- <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
+        rel="stylesheet" /> --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -27,6 +31,7 @@
         body {
             margin-left: 20px;
             margin-right: 200px;
+            font-family: 'Poppins', sans-serif;
         }
 
         span,
@@ -42,6 +47,12 @@
             width: 200px;
             height: 200px;
             z-index: -5;
+        }
+
+        .logo-polisi-emas {
+            position: absolute;
+            top: 65px;
+            left: 683px;
         }
 
         @media only screen and (max-width: 600px) {
@@ -61,6 +72,25 @@
             .pelanggar {
                 width: 70px
             }
+
+            .span-mobile-text {
+                font-size: 10px;
+            }
+
+            .col-mobile-12 {
+                flex: 0 0 auto !important;
+                width: 100% !important;
+            }
+
+            .logo-polisi-emas {
+                position: absolute;
+                top: 119px;
+                left: 174px;
+            }
+
+            .row-kop {
+                margin-bottom: 70px
+            }
         }
 
         @media print {
@@ -72,18 +102,25 @@
                 height: 200px;
                 z-index: -5;
             }
+
+
+            .logo-polisi-emas {
+                position: absolute;
+                top: 65px;
+                left: 325px;
+            }
         }
     </style>
 </head>
 
 <body class="d-flex flex-column" style="margin-left:20px;margin-right:20px">
     <main class="flex-shrink-0">
-        <img src="{{ asset('/img/logo_polisi_emas.png') }}" class="logo-emas">
+        {{-- <img src="{{ asset('/img/logo_polisi_emas.png') }}" class="logo-emas"> --}}
         {{-- KOP --}}
-        <div class="row">
-            <div class="col-sm-9 mt-4" style="font-size:13px;font-weight:500;text-align:start">
+        <div class="row row-kop">
+            <div class="col-sm-9 col-9 mt-4" style="font-size:13px;font-weight:500;text-align:start">
                 <div class="row">
-                    <div class="col-sm-8" style="text-align: center">
+                    <div class="col-sm-5 col-7 col-mobile-12" style="text-align: center">
                         <span class="text-center">KEPOLISIAN NEGARA REPUBLIK INDONESIA</span>
                         <br>
                         <span class="text-center">DAERAH JAWA TIMUR</span>
@@ -96,15 +133,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3 mt-5" style="font-size: 13px">
+            <div class="col-sm-3 col-3 mt-5" style="font-size: 13px">
                 {{-- <span><u>Nomor : 132456789</u></span> --}}
             </div>
         </div>
         {{-- BODY --}}
         <center style="font-size:13px;font-weight:500;margin-top:20px">
-            <span><u>SURAT KETERANGAN CATATAN KEPOLISIAN</u></span>
+
+            <img src="{{ asset('/img/logo_polisi_emas.png') }}" width="50px" class="logo-polisi-emas">
+            <span><u>SURAT TEGURAN POLISI PARIWISATA</u></span>
             <br>
-            <span>POLICE RECORD</span>
+            <span>{{ Str::upper('tourism police warning letter') }}</span>
             <br>
             <span>Nomor : {{ $data->number_reprimand }}</span>
         </center>
@@ -157,7 +196,7 @@
         <span>
             <u>Setelah diadakan teguran hingga saat dikeluarkan surat keterangan ini yang didasarkan kepada :</u>
             <br>
-            <span>The bearer here of proves not to be involved</span>
+            <span>After being given a warning until the moment this certificate is issued which is based on:</span>
         </span>
         <ul>
             @foreach ($penaltyReprimand as $p)
@@ -168,9 +207,9 @@
             @endforeach
         </ul>
         <span>
-            <u>Bahwa nama tersebut diatas melakukan pelanggaran dalam wisata</u>
+            <u>Bahwa nama tersebut diatas melakukan pelanggaran pariwisata</u>
             <br>
-            <span>The bearer here of proves not to be involved</span>
+            <span>That the name mentioned above committed a tourism violation</span>
         </span>
         <center>
             <span>
@@ -182,39 +221,43 @@
         </center>
         <br>
         <div class="row" style="text-align: end">
-            <div class="col-sm-2 col-2">
+            <div class="col-md-2 col-2">
                 <img src="{{ url('storage/identitas-pelanggar') . '/' . $data->image_identity }}" alt=""
                     class="identitas-pelanggar" width="150px">
             </div>
-            <div class="col-sm-4 col-4">
+            <div class="col-md-4 col-4">
                 <img src="{{ url('storage/pelanggar') . '/' . $data->image }}" alt="" class="pelanggar"
                     width="150px">
             </div>
-            <div class="col-sm-6 col-6">
+            <div class="col-md-6 col-6">
                 <table>
                     <tr>
                         <td>
-                            <span><u>Dikeluarkan di</u></span>
+                            <span class="span-mobile-text"><u>Dikeluarkan di</u></span>
                             <br>
-                            <span>Issued in</span>
+                            <span class="span-mobile-text">Issued in</span>
                         </td>
-                        <td>:</td>
-                        <td><span>Bondowoso</span></td>
+                        <td><span class="span-mobile-text">:</span></td>
+                        <td><span class="span-mobile-text">Bondowoso</span></td>
                     </tr>
                     <tr>
                         <td>
-                            <span><u>Pada Tanggal</u></span>
+                            <span class="span-mobile-text"><u>Pada Tanggal</u></span>
                             <br>
-                            <span>on</span>
+                            <span class="span-mobile-text">on</span>
                         </td>
-                        <td>:</td>
-                        <td><span>
+                        <td><span class="span-mobile-text">:</span></td>
+                        <td><span class="span-mobile-text">
                                 {{ \Carbon\Carbon::now()->format('d-m-Y') }}</span></td>
                     </tr>
                 </table>
             </div>
         </div>
     </main>
+    <script type="text/javascript">
+        window.print();
+        window.onafterprint = window.close;
+    </script>
 </body>
 
 </html>

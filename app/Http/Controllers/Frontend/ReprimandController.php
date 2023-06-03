@@ -54,12 +54,12 @@ class ReprimandController extends Controller
                 //     'location' => $loc,
                 // );
                 $no = '';
-                $noRep = Reprimand::orderBy('id','DESC')->first();;
+                $noRep = Reprimand::orderBy('id', 'DESC')->first();;
                 if ($noRep) {
-                    $no = 'POLPAR/IV/2023/'.$noRep->id+1;
+                    $no = 'POLPAR/' . $this->getRomawi(date('n')) . '/2023/' . $noRep->id + 1;
                 } else {
 
-                    $no = 'POLPAR/IV/2023/'.'1';
+                    $no = 'POLPAR/' . $this->getRomawi(date('n')) . '/2023/' . '1';
                 }
 
                 $document = $request->photo;
@@ -88,6 +88,7 @@ class ReprimandController extends Controller
                 $model->officer_id = $request->officer;
                 $model->signature = $file;
                 $model->number_reprimand = $no;
+                $model->url = md5($no);
                 $model->save();
 
                 foreach ($request->penalty as $key => $value) {
@@ -97,8 +98,8 @@ class ReprimandController extends Controller
                     $penalty->save();
                 }
             });
-            $data = Reprimand::orderBy('id','DESC')->first();
-            return redirect('reprimand/'.$data->id);
+            $data = Reprimand::orderBy('id', 'DESC')->first();
+            return redirect('reprimand/' . $data->url);
             // return redirect()->back()->with('message', 'Data Pelanggar berhasil ditambahkan.');
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -111,8 +112,87 @@ class ReprimandController extends Controller
 
     public function show($id)
     {
-        $data = Reprimand::find($id);
-        $penaltyReprimand = ReprimandsPenalty::with('penalty')->where('reprimands_id', $id)->get();
+        $data = Reprimand::where('url', $id)->first();
+        $penaltyReprimand = ReprimandsPenalty::with('penalty')->where('reprimands_id', $data->id)->get();
         return view('Frontend.Pages.Reprimand.show', compact('data', 'penaltyReprimand'));
+    }
+
+    function getRomawi($bln)
+    {
+
+        switch ($bln) {
+
+            case 1:
+
+                return "I";
+
+                break;
+
+            case 2:
+
+                return "II";
+
+                break;
+
+            case 3:
+
+                return "III";
+
+                break;
+
+            case 4:
+
+                return "IV";
+
+                break;
+
+            case 5:
+
+                return "V";
+
+                break;
+
+            case 6:
+
+                return "VI";
+
+                break;
+
+            case 7:
+
+                return "VII";
+
+                break;
+
+            case 8:
+
+                return "VIII";
+
+                break;
+
+            case 9:
+
+                return "IX";
+
+                break;
+
+            case 10:
+
+                return "X";
+
+                break;
+
+            case 11:
+
+                return "XI";
+
+                break;
+
+            case 12:
+
+                return "XII";
+
+                break;
+        }
     }
 }

@@ -44,21 +44,21 @@
             z-index: -5;
         }
 
-        @media only screen and (max-width: 600px){
-            .logo-emas{
+        @media only screen and (max-width: 600px) {
+            .logo-emas {
                 position: absolute;
-    top: 271px;
-    left: 115px;
-    width: 121px;
-    height: 129px;
-    z-index: -5;
+                top: 271px;
+                left: 115px;
+                width: 121px;
+                height: 129px;
+                z-index: -5;
             }
 
-            .identitas-pelanggar{
+            .identitas-pelanggar {
                 width: 70px
             }
 
-            .pelanggar{
+            .pelanggar {
                 width: 70px
             }
         }
@@ -66,7 +66,7 @@
         @media print {
             .logo-emas {
                 position: absolute;
-                top: 200px;
+                top: 230px;
                 left: 279px;
                 width: 200px;
                 height: 200px;
@@ -183,11 +183,12 @@
         <br>
         <div class="row" style="text-align: end">
             <div class="col-sm-2 col-2">
-                <img src="{{ url('storage/identitas-pelanggar') . '/' . $data->image_identity }}" alt="" class="identitas-pelanggar"
-                    width="150px">
+                <img src="{{ url('storage/identitas-pelanggar') . '/' . $data->image_identity }}" alt=""
+                    class="identitas-pelanggar" width="150px">
             </div>
             <div class="col-sm-4 col-4">
-                <img src="{{ url('storage/pelanggar') . '/' . $data->image }}" alt="" class="pelanggar" width="150px">
+                <img src="{{ url('storage/pelanggar') . '/' . $data->image }}" alt="" class="pelanggar"
+                    width="150px">
             </div>
             <div class="col-sm-6 col-6">
                 <table>

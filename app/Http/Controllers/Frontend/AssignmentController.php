@@ -14,7 +14,7 @@ class AssignmentController extends Controller
 {
     public function index()
     {
-        $cek = Assignment::orderBy('id', 'ASC')->first();
+        $cek = Assignment::orderBy('id', 'DESC')->first();
         $no = '';
         if ($cek) {
             $no = $cek->id + 1;

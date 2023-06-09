@@ -90,8 +90,7 @@
                 <div class="col-12 mt-3">
                     <div class="form-group">
                         <label for="">Keterangan</label>
-                        <textarea name="keterangan" class="form-control" id="" cols="30" rows="10" placeholder="Keterangan">
-                    </textarea>
+                        <textarea name="keterangan" class="form-control" id="" cols="30" rows="10" placeholder="Keterangan"></textarea>
                     </div>
                 </div>
                 <h4 class="mt-4">Petugas</h4>

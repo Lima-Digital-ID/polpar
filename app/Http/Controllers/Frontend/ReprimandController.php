@@ -7,6 +7,7 @@ use App\Models\Officer;
 use App\Models\Penalty;
 use App\Models\Reprimand;
 use App\Models\ReprimandsPenalty;
+use Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -56,10 +57,10 @@ class ReprimandController extends Controller
                 $no = '';
                 $noRep = Reprimand::orderBy('id', 'DESC')->first();;
                 if ($noRep) {
-                    $no = 'POLPAR/' . $this->getRomawi(date('n')) . '/2023/' . $noRep->id + 1;
+                    $no = 'POLPAR/' . Helper::getRomawi(date('n')) . '/2023/' . $noRep->id + 1;
                 } else {
 
-                    $no = 'POLPAR/' . $this->getRomawi(date('n')) . '/2023/' . '1';
+                    $no = 'POLPAR/' . Helper::getRomawi(date('n')) . '/2023/' . '1';
                 }
 
                 $document = $request->photo;
@@ -115,84 +116,5 @@ class ReprimandController extends Controller
         $data = Reprimand::where('url', $id)->first();
         $penaltyReprimand = ReprimandsPenalty::with('penalty')->where('reprimands_id', $data->id)->get();
         return view('Frontend.Pages.Reprimand.show', compact('data', 'penaltyReprimand'));
-    }
-
-    function getRomawi($bln)
-    {
-
-        switch ($bln) {
-
-            case 1:
-
-                return "I";
-
-                break;
-
-            case 2:
-
-                return "II";
-
-                break;
-
-            case 3:
-
-                return "III";
-
-                break;
-
-            case 4:
-
-                return "IV";
-
-                break;
-
-            case 5:
-
-                return "V";
-
-                break;
-
-            case 6:
-
-                return "VI";
-
-                break;
-
-            case 7:
-
-                return "VII";
-
-                break;
-
-            case 8:
-
-                return "VIII";
-
-                break;
-
-            case 9:
-
-                return "IX";
-
-                break;
-
-            case 10:
-
-                return "X";
-
-                break;
-
-            case 11:
-
-                return "XI";
-
-                break;
-
-            case 12:
-
-                return "XII";
-
-                break;
-        }
     }
 }

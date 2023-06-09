@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\AssignmentController;
 use App\Http\Controllers\Frontend\LandingPageController;
 use App\Http\Controllers\Frontend\ReprimandController;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ReprimandController::class, 'index']);
 Route::post('/reprimand', [ReprimandController::class, 'store']);
 Route::get('/reprimand/{id}', [ReprimandController::class, 'show']);
+Route::get('/assignment', [AssignmentController::class, 'index']);
+Route::post('/assignment', [AssignmentController::class, 'store']);
+Route::get('/assignment/{id}', [AssignmentController::class, 'show']);

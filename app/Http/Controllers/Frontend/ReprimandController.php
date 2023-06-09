@@ -76,7 +76,7 @@ class ReprimandController extends Controller
                 $newScanImageD = time() . '_' . $scanImage->getClientOriginalName();
                 $scanImageD->move($uploadPathD, $newScanImageD);
 
-                $folderPath = public_path('storage/signature/');
+                $folderPath = public_path('image/signature/');
 
                 $image_parts = explode(";base64,", $request->signature);
 

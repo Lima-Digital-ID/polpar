@@ -170,7 +170,7 @@
                             <option value="" selected disabled>Pilih Petugas</option>
                             @foreach ($officer as $ofc)
                                 <option value="{{ $ofc->id }}"
-                                    data-signature="{{ url('storage/signature-officer') . '/' . $ofc->signature }}">
+                                    data-signature="{{ url('image/signature-officer') . '/' . $ofc->signature }}">
                                     {{ $ofc->name }}</option>
                             @endforeach
                         </select>

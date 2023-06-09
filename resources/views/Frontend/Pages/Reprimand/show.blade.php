@@ -222,11 +222,11 @@
         <br>
         <div class="row" style="text-align: end">
             <div class="col-md-2 col-2">
-                <img src="{{ url('storage/identitas-pelanggar') . '/' . $data->image_identity }}" alt=""
+                <img src="{{ url('image/identitas-pelanggar') . '/' . $data->image_identity }}" alt=""
                     class="identitas-pelanggar" width="150px">
             </div>
             <div class="col-md-4 col-4">
-                <img src="{{ url('storage/pelanggar') . '/' . $data->image }}" alt="" class="pelanggar"
+                <img src="{{ url('image/pelanggar') . '/' . $data->image }}" alt="" class="pelanggar"
                     width="150px">
             </div>
             <div class="col-md-6 col-6">

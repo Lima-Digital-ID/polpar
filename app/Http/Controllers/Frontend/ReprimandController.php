@@ -55,7 +55,7 @@ class ReprimandController extends Controller
                 //     'location' => $loc,
                 // );
                 $no = '';
-                $noRep = Reprimand::orderBy('id', 'DESC')->first();;
+                $noRep = Reprimand::orderBy('id', 'DESC')->first();
                 if ($noRep) {
                     $no = 'POLPAR/' . Helper::getRomawi(date('n')) . '/2023/' . $noRep->id + 1;
                 } else {
@@ -63,10 +63,19 @@ class ReprimandController extends Controller
                     $no = 'POLPAR/' . Helper::getRomawi(date('n')) . '/2023/' . '1';
                 }
 
-                $document = $request->photo;
-                $document->storeAs('public/pelanggar', $document->hashName());
-                $documentIdentity = $request->identity_file;
-                $documentIdentity->storeAs('public/identitas-pelanggar', $documentIdentity->hashName());
+                // $document = $request->photo;
+                // $document->storeAs('public/pelanggar', $document->hashName());
+                // $documentIdentity = $request->identity_file;
+                // $documentIdentity->storeAs('public/identitas-pelanggar', $documentIdentity->hashName());
+                $uploadPath = 'image/pelanggar';
+                $scanImage = $request->photo;
+                $newScanImage = time() . '_' . $scanImage->getClientOriginalName();
+                $scanImage->move($uploadPath, $newScanImage);
+                $uploadPathD = 'image/identitas-pelanggar';
+                $scanImageD = $request->identity_file;
+                $newScanImageD = time() . '_' . $scanImage->getClientOriginalName();
+                $scanImageD->move($uploadPathD, $newScanImageD);
+
                 $folderPath = public_path('storage/signature/');
 
                 $image_parts = explode(";base64,", $request->signature);
@@ -80,8 +89,8 @@ class ReprimandController extends Controller
                 $file = uniqid() . '.' . $image_type;
                 file_put_contents($folderPath . $file, $image_base64);
                 $model = new Reprimand();
-                $model->image = $document->hashName();
-                $model->image_identity = $documentIdentity->hashName();
+                $model->image = $newScanImage;
+                $model->image_identity = $newScanImageD;
                 $model->name = $request->name;
                 $model->identity = $request->identity;
                 $model->identity_number = $request->identityNumber;

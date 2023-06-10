@@ -69,8 +69,8 @@
                                     <td>{{ $item->phone }}</td>
                                     <td>{{ $item->number_reprimand }}</td>
                                     <td>{{ $item->officer->name }}</td>
-                                    <td><img src="{{ url('image/signature') . '/' . $item->signature }}" alt=""
-                                            width="150px"></td>
+                                    <td><img src="{{ url('public/image/signature') . '/' . $item->signature }}"
+                                            alt="" width="150px"></td>
                                     <td>
                                         @foreach ($detail as $itemd)
                                             <li>

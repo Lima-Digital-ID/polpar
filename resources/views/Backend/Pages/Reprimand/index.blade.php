@@ -39,6 +39,7 @@
                                 <th>Foto Identitas</th>
                                 <th>No Identitas Pelanggar</th>
                                 <th>Nomor Telepon Pelanggar</th>
+                                <th>Aksi</th>
                                 <th>No Surat</th>
                                 <th>Petugas</th>
                                 <th>Tanda Tangan</th>
@@ -67,6 +68,9 @@
                                             width="150px"></td>
                                     <td>{{ $item->identity_number }}</td>
                                     <td>{{ $item->phone }}</td>
+                                    <td><a href="{{ url('/reprimand') . '/' . $item->url }}" target="_blank"
+                                            class="btn btn-primary">Cetak</a>
+                                    </td>
                                     <td>{{ $item->number_reprimand }}</td>
                                     <td>{{ $item->officer->name }}</td>
                                     <td><img src="{{ url('public/image/signature') . '/' . $item->signature }}"

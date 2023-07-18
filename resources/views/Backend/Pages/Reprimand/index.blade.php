@@ -55,6 +55,7 @@
                                         ->where('reprimands_id', $item->id)
                                         ->get();
                                 @endphp
+                                @if ($item->officer != null)
                                 <tr>
                                     <td></td>
                                     <td>{{ $loop->iteration }}</td>
@@ -84,6 +85,7 @@
                                         @endforeach
                                     </td>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

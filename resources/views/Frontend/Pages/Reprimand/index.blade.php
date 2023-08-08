@@ -33,6 +33,16 @@
             transform-origin: 0 0;
             transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
         }
+        .content-pasal .content{
+            display: none
+        }
+        .content-pasal.show .content{
+            display: block
+        }
+        .content-pasal.checked .pasal{
+            color:#198754;
+            font-weight: bold;
+        }
     </style>
 
     <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
@@ -48,17 +58,16 @@
                 <div class="col-12">
                     <center>
                         <img src="{{ asset('/img/logo_polisi.png') }}" alt="" width="150px">
-                        <h4 class="text-center text-capitalize">Kepolisian Negara Republik Indonesia</h4>
-                        <h4 class="text-center text-capitalize">Daerah Jawa Timur</h4>
-                        <h4 class="text-center text-capitalize">Resor Bondowoso</h4>
+                        <h5 class="text-center text-capitalize">Kepolisian Negara Republik Indonesia</h5>
+                        <h5 class="text-center text-capitalize">Daerah Jawa Timur</h5>
+                        <h5 class="text-center text-capitalize">Resor Bondowoso</h5>
                     </center>
                 </div>
-                <div class="col-12">
-                    <h2 class="text-center text-capitalize">Surat Teguran</h2>
+                <div class="col-12 mb-3 mt-5">
+                    <h2 class="text-center fw-bold text-capitalize">Surat Teguran</h2>
                 </div>
 
-                <div class="col-6 col-md-6">
-
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label for="myFileInput">Foto Pelanggar</label>
                         <input id="myFileInput" type="file" accept="capture=camera" name="photo"
@@ -70,11 +79,8 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6 col-md-6">
-                    <div class="mb-3">
-
+                <div class="col-md-6 mb-3" id="col-preview" style="display: none">
                         <img id="preview-image-before-upload" alt="" style="max-height: 150px;">
-                    </div>
                 </div>
 
                 <div class="col-12 col-md-6">
@@ -87,7 +93,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6 col-md-6">
+                <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <select id="identity" class="form-control @error('identity') is-invalid @enderror"
                             style="width: 100%" name="identity">
@@ -101,7 +107,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6 col-md-6">
+                <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <input class="form-control @error('identityNumber') is-invalid @enderror" id="identityNumber"
                             type="number" placeholder="Enter your name..." name="identityNumber" />
@@ -121,7 +127,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6 col-md-6">
+                <div class="col-md-6">
 
                     <div class="mb-3">
                         <label for="myFileInputIdentity">File Identitas</label>
@@ -134,24 +140,37 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6 col-md-6">
+                <div class="col-md-6" style="display: none" id="col-preview-identity">
                     <div class="mb-3">
 
                         <img id="preview-identity-before-upload" alt="" style="max-height: 150px;">
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-12 mt-5">
                     <center>
-                        <h3>
+                        <h5 class="fw-bold mb-4">
                             UNDANG-UNDANG REPUBLIK INDONESIA
                             NOMOR 10.TAHUN 2009.
-                        </h3>
-                        <h3>
                             TENTANG
                             KEPARIWISATAAN
-                        </h3>
+                        </h5>
                     </center>
-                    <div class="mb-3">
+                        @foreach ($pasal as $key => $p)
+                            <div class="content-pasal" id="cp{{$key}}">
+                                <div class="d-flex pasal justify-content-between" data-key="{{$key}}">
+                                    <div>
+                                        <span class="fa fa-check-circle me-2"></span>
+                                        {{ $p->title }}
+                                    </div>
+                                    <a href="" class="btn btn-primary btn-sm detail" data-key="{{$key}}">Lihat Detail</a>
+                                </div>
+                                <div class="content mt-2">
+                                    {!! $p->content !!}
+                                </div>
+                            </div>
+                            <hr>
+                        @endforeach
+                    {{-- <div class="mb-3">
                         <ol>
                             @foreach ($pasal as $p)
                                 <li>
@@ -161,10 +180,10 @@
                                 </li>
                             @endforeach
                         </ol>
-                    </div>
+                    </div> --}}
                 </div>
-                <div class="col-6 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-md-6 mt-3">
+                    <div class="form-floating">
                         <select id="officer" class="form-control @error('officer') is-invalid @enderror"
                             style="width: 100%" name="officer">
                             <option value="" selected disabled>Pilih Petugas</option>
@@ -182,7 +201,7 @@
                         <img id="image-signature-officer" alt="" width="150px" class="mt-4">
                     </div>
                 </div>
-                <div class="col-6 col-md-6">
+                <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <canvas id="signature-pad"
                             class="signature-pad simpanttd @error('signature')
@@ -213,6 +232,7 @@
                 <button type="reset" class="btn btn-secondary text-white"><i class="fas fa-refresh"></i> Reset</button>
             </div>
     </div>
+    <input type="hidden" name="">
     </form>
     </div>
 @endsection
@@ -221,7 +241,27 @@
 
     <script>
         $(document).ready(function(e) {
-
+            $(".detail").click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var key = $(this).data('key')
+                if($(this).closest('.content-pasal').hasClass("show")){
+                    $(".content-pasal").removeClass('show')
+                }
+                else{
+                    $(".content-pasal").removeClass('show')
+                    $(".content-pasal#cp"+key+"").addClass('show')
+                }
+            })
+            $(".pasal").click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                
+                var key = $(this).data('key')
+                $(".content-pasal").removeClass('checked')
+                $(".content-pasal#cp"+key+"").addClass('checked')
+            })
+   
             // Open Camera
             var myInput = document.getElementById('myFileInput');
 
@@ -237,7 +277,7 @@
                 let reader = new FileReader();
 
                 reader.onload = (e) => {
-
+                    $("#col-preview").show()
                     $('#preview-image-before-upload').attr('src', e.target.result);
                 }
 
@@ -260,7 +300,7 @@
                 let reader = new FileReader();
 
                 reader.onload = (e) => {
-
+                    $("#col-preview-identity").show()
                     $('#preview-identity-before-upload').attr('src', e.target.result);
                 }
 
